@@ -5,7 +5,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faTwitter, faLinktree } from '@fortawesome/free-brands-svg-icons';
-import { faSkull } from '@fortawesome/free-solid-svg-icons';
+
 
 // Lazy load pages for better performance
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
@@ -114,8 +114,8 @@ const App: React.FC = () => {
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
             fontFamily: '"Courier New", monospace'
           }}>
-            <FontAwesomeIcon icon={faSkull} style={{ marginRight: '0.5rem' }} />
-            WANTED: Social Links
+            
+             Social Links
           </h3>
           <div style={{
             display: 'flex',

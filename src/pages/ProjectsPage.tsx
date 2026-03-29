@@ -14,7 +14,7 @@ const ProjectsPage: React.FC = () => {
       title: "My Portfolio",
       description: "My One Piece Themed Portfolio Website.",
       tech: ["React","Typescript",],
-      url: "https://github.com/M0x37/LinkTree_Template"
+      url: "https://github.com/M0x37/Portfolio"
     }
   ];
 

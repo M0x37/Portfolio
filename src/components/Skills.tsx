@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Skills: React.FC = () => {
   const skills = [
@@ -6,6 +6,16 @@ const Skills: React.FC = () => {
     'Python',
     'HTML+CSS+JS'
   ];
+
+  const luffyQuotes = [
+    "I'm gonna be King of the Pirates!",
+    "If you don't take risks, you can't create a future!",
+    "My friends are my greatest treasure!",
+    "Being alone is more painful than getting hurt!",
+    "I don't care who you are, I will protect my crew!"
+  ];
+
+  const [currentQuote] = useState(() => Math.floor(Math.random() * luffyQuotes.length));
 
   return (
     <section id="skills" style={{
@@ -134,7 +144,7 @@ const Skills: React.FC = () => {
               fontSize: '1.2rem',
               fontWeight: 'bold',
               marginBottom: '1rem',
-              color: '#2c1810',
+              color: '#f4e8d0',
               textTransform: 'lowercase',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
               fontFamily: '"Courier New", monospace'
@@ -182,6 +192,39 @@ const Skills: React.FC = () => {
         </div>
         </div>
         
+        {/* Luffy Quotes Section */}
+        <div style={{
+          marginTop: '3rem',
+          backgroundColor: '#2c1810',
+          border: '3px solid #8b4513',
+          borderRadius: '8px',
+          padding: '2rem',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            fontSize: '0.9rem',
+            color: '#8b4513',
+            marginBottom: '1rem',
+            fontFamily: '"Courier New", monospace',
+            textTransform: 'uppercase',
+            letterSpacing: '2px'
+          }}>
+            Captain&apos;s Log
+          </div>
+          <div style={{
+            fontSize: '1.3rem',
+            fontStyle: 'italic',
+            color: '#f4e8d0',
+            fontFamily: '"Courier New", monospace',
+            minHeight: '3rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            &ldquo;{luffyQuotes[currentQuote]}&rdquo;
+          </div>
+        </div>
+
         {/* Global Styles */}
         <style>{`
           @keyframes blink {

@@ -307,7 +307,7 @@ const About: React.FC = () => {
                 fontSize: '1.2rem',
                 fontWeight: 'bold',
                 marginBottom: '1rem',
-                color: '#2c1810',
+                color: '#f4e8d0',
                 textTransform: 'lowercase',
                 textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
                 fontFamily: '"Courier New", monospace'
