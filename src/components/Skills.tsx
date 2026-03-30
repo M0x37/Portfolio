@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Skills: React.FC = () => {
   const skills = [
@@ -16,6 +16,38 @@ const Skills: React.FC = () => {
   ];
 
   const [currentQuote] = useState(() => Math.floor(Math.random() * luffyQuotes.length));
+  const [episode, setEpisode] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    console.log('Fetching episode from API...');
+    fetch('http://192.168.178.21:3000/api/episode')
+      .then(res => {
+        console.log('Response status:', res.status);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.text();
+      })
+      .then(text => {
+        console.log('Raw response:', text);
+        // Try to parse as JSON, fallback to plain number
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch {
+          data = text;
+        }
+        const ep = typeof data === 'object' ? data.episode : parseInt(data, 10);
+        console.log('Parsed episode:', ep);
+        setEpisode(ep || 0);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Fetch error:', err);
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <section id="skills" style={{
@@ -222,6 +254,74 @@ const Skills: React.FC = () => {
             justifyContent: 'center'
           }}>
             &ldquo;{luffyQuotes[currentQuote]}&rdquo;
+          </div>
+        </div>
+
+        {/* Episode Tracker */}
+        <div style={{
+          marginTop: '2rem',
+          backgroundColor: '#2c1810',
+          border: '3px solid #8b4513',
+          borderRadius: '8px',
+          padding: '1.5rem 2rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '1rem'
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+            <span style={{ fontSize: '1.5rem' }}>📺</span>
+            <div>
+              <div style={{
+                fontSize: '0.75rem',
+                color: '#8b4513',
+                textTransform: 'uppercase',
+                letterSpacing: '2px',
+                fontFamily: '"Courier New", monospace',
+                marginBottom: '0.25rem'
+              }}>
+                Currently Watching
+              </div>
+              <div style={{
+                fontSize: '0.9rem',
+                color: '#f4e8d0',
+                fontFamily: '"Courier New", monospace'
+              }}>
+                One Piece
+              </div>
+            </div>
+          </div>
+          <div style={{
+            textAlign: 'right'
+          }}>
+            <div style={{
+              fontSize: '0.75rem',
+              color: '#8b4513',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              fontFamily: '"Courier New", monospace',
+              marginBottom: '0.25rem'
+            }}>
+              Episode
+            </div>
+            <div style={{
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              color: '#27c93f',
+              fontFamily: '"Courier New", monospace'
+            }}>
+              {error ? (
+                <span style={{ color: '#e94560', fontSize: '0.9rem' }} title={error}>Err</span>
+              ) : loading ? (
+                '...'
+              ) : (
+                episode
+              )}
+            </div>
           </div>
         </div>
 
