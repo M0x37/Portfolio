@@ -225,46 +225,6 @@ const Skills: React.FC = () => {
           </div>
         </div>
 
-        {/* Episode Tracker */}
-        <div style={{
-          marginTop: '2rem',
-          backgroundColor: '#2c1810',
-          border: '3px solid #8b4513',
-          borderRadius: '8px',
-          padding: '1.5rem 2rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '1rem'
-        }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem'
-          }}>
-            <span style={{ fontSize: '1.5rem' }}>📺</span>
-            <div>
-              <div style={{
-                fontSize: '0.75rem',
-                color: '#8b4513',
-                textTransform: 'uppercase',
-                letterSpacing: '2px',
-                fontFamily: '"Courier New", monospace',
-                marginBottom: '0.25rem'
-              }}>
-                Currently Watching
-              </div>
-              <div style={{
-                fontSize: '0.9rem',
-                color: '#f4e8d0',
-                fontFamily: '"Courier New", monospace'
-              }}>
-                One Piece
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Global Styles */}
         <style>{`
           @keyframes blink {
