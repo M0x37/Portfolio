@@ -13,8 +13,14 @@ const ProjectsPage: React.FC = () => {
     {
       title: "My Portfolio",
       description: "My One Piece Themed Portfolio Website.",
-      tech: ["React","Typescript",],
+      tech: ["React", "Typescript",],
       url: "https://github.com/M0x37/Portfolio"
+    },
+    {
+      title: "NEXUS | OSINt",
+      description: "A small OSINT Tool. I leaned to create CLI Tools with it.",
+      tech: ["Python", "HTMl", ],
+      url: "https://github.com/M0x37/NEXUS-OSINT-TOOL"
     }
   ];
 
@@ -50,7 +56,9 @@ const ProjectsPage: React.FC = () => {
         textAlign: 'center',
         marginBottom: '2rem',
         border: '3px solid #654321',
-        borderRadius: '8px'
+        borderRadius: '8px',
+        maxWidth: '800px',
+        margin: '0 auto 2rem auto'
       }}>
         <h1 style={{
           fontSize: '2.5rem',
@@ -86,7 +94,7 @@ const ProjectsPage: React.FC = () => {
         }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: '1fr',
             gap: '2rem'
           }}>
             {projects.map((project, index) => (
@@ -95,10 +103,11 @@ const ProjectsPage: React.FC = () => {
                 style={{
                   backgroundColor: 'rgba(244, 232, 208, 0.9)',
                   borderRadius: '16px',
-                  padding: '2rem',
+                  padding: '2.5rem',
                   border: '3px solid #8b4513',
                   boxShadow: '0 8px 20px rgba(139, 69, 19, 0.3)',
-                  transition: 'all 0.3s ease'
+                  transition: 'all 0.3s ease',
+                  textAlign: 'center'
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
@@ -117,6 +126,7 @@ const ProjectsPage: React.FC = () => {
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   marginBottom: '1.5rem'
                 }}>
                   <h3 style={{
@@ -134,10 +144,11 @@ const ProjectsPage: React.FC = () => {
                 
                 <p style={{
                   color: '#5d4037',
-                  margin: '0 0 2rem 0',
+                  margin: '0 0 1.5rem 0',
                   lineHeight: 1.6,
                   fontSize: '1rem',
-                  fontFamily: '"Georgia", serif'
+                  fontFamily: '"Georgia", serif',
+                  textAlign: 'center'
                 }}>
                   {project.description}
                 </p>
@@ -146,14 +157,15 @@ const ProjectsPage: React.FC = () => {
                   display: 'flex',
                   flexWrap: 'wrap',
                   gap: '0.5rem',
-                  marginBottom: '2rem'
+                  marginBottom: '2rem',
+                  justifyContent: 'center'
                 }}>
                   {project.tech.map((tech, techIndex) => (
                     <span
                       key={techIndex}
                       style={{
                         backgroundColor: 'rgba(139, 69, 19, 0.2)',
-                        color: '#f4e8d0',
+                        color: '#5d4037',
                         padding: '0.25rem 0.75rem',
                         borderRadius: '8px',
                         fontSize: '0.875rem',
@@ -196,7 +208,7 @@ const ProjectsPage: React.FC = () => {
                   onMouseOut={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
                     e.currentTarget.style.boxShadow = '0 8px 20px rgba(139, 69, 19, 0.4)';
-                    e.currentTarget.style.backgroundColor = 'rgba(23, 22, 22, 0.8)';
+                    e.currentTarget.style.backgroundColor = 'transparent';
                     e.currentTarget.style.borderColor = '#8b4513';
                   }}
                 >

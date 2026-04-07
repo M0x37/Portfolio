@@ -1,10 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faTwitter, faLinktree } from '@fortawesome/free-brands-svg-icons';
-import { faSkull } from '@fortawesome/free-solid-svg-icons';
+import { faSkull, faAnchor, faCompass } from '@fortawesome/free-solid-svg-icons';
 import Skills from './Skills';
 
 const About: React.FC = () => {
+  const [typedText, setTypedText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const [glowIntensity, setGlowIntensity] = useState(0);
+  const fullText = 'I am a 14 Web Developer and Hobby Engineer from Germany and a big One Piece Fan.';
+
+  // Typewriter effect for terminal
+  useEffect(() => {
+    if (!isTyping) return;
+    
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index <= fullText.length) {
+        setTypedText(fullText.slice(0, index));
+        index++;
+      } else {
+        setIsTyping(false);
+        clearInterval(interval);
+      }
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, [isTyping]);
+
+  // Pulsing glow effect for profile
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGlowIntensity(prev => (prev + 1) % 100);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section id="about" style={{
       minHeight: '100vh',
@@ -37,6 +67,30 @@ const About: React.FC = () => {
         margin: '0 auto',
         width: '100%'
       }}>
+        {/* Decorative Corner Elements */}
+        <div style={{
+          position: 'absolute',
+          top: '2rem',
+          left: '2rem',
+          fontSize: '2rem',
+          color: '#8b4513',
+          opacity: 0.3,
+          animation: 'float 4s ease-in-out infinite'
+        }}>
+          <FontAwesomeIcon icon={faAnchor} />
+        </div>
+        <div style={{
+          position: 'absolute',
+          bottom: '2rem',
+          right: '2rem',
+          fontSize: '2rem',
+          color: '#8b4513',
+          opacity: 0.3,
+          animation: 'float 4s ease-in-out infinite reverse'
+        }}>
+          <FontAwesomeIcon icon={faCompass} />
+        </div>
+
         {/* Section Header */}
         <div style={{
           textAlign: 'center',
@@ -94,10 +148,10 @@ const About: React.FC = () => {
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(139, 69, 19, 0.1)',
           textAlign: 'center'
         }}>
-          {/* Profile Picture */}
+          {/* Profile Picture with Animated Glow */}
           <div style={{
-            width: '150px',
-            height: '150px',
+            width: '160px',
+            height: '160px',
             borderRadius: '50%',
             backgroundColor: '#e8dcc0',
             margin: '0 auto 2rem auto',
@@ -108,20 +162,34 @@ const About: React.FC = () => {
             fontSize: '4rem',
             color: '#8b4513',
             overflow: 'hidden',
-            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)'
+            boxShadow: `0 0 ${20 + Math.sin(glowIntensity * 0.1) * 15}px rgba(139, 69, 19, ${0.4 + Math.sin(glowIntensity * 0.1) * 0.2}), 0 4px 16px rgba(0, 0, 0, 0.3)`,
+            transition: 'box-shadow 0.1s ease',
+            position: 'relative'
           }}>
+            <div style={{
+              position: 'absolute',
+              top: '-10%',
+              left: '-10%',
+              right: '-10%',
+              bottom: '-10%',
+              background: `conic-gradient(from ${glowIntensity * 3.6}deg, transparent, rgba(139, 69, 19, 0.3), transparent)`,
+              borderRadius: '50%',
+              animation: 'spin 10s linear infinite'
+            }} />
             <img
               src="/profile.jpg"
               alt="Profile"
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover'
+                objectFit: 'contain',
+                objectPosition: 'center',
+                position: 'relative',
+                zIndex: 1
               }}
               onError={(e) => {
-                // Fallback to skull icon if image not found
                 e.currentTarget.style.display = 'none';
-                e.currentTarget.parentElement!.innerHTML = '�';
+                e.currentTarget.parentElement!.innerHTML = '<div style="font-size: 4rem; color: #8b4513;">☠</div>';
               }}
             />
           </div>
@@ -294,14 +362,15 @@ const About: React.FC = () => {
                 color: '#f4e8d0',
                 fontSize: '12px'
               }}>
-                max@portfolio:~$
+                m0x@portfolio:~$
               </div>
             </div>
             
             {/* Terminal Content */}
             <div style={{
               padding: '2rem',
-              color: '#f4e8d0'
+              color: '#f4e8d0',
+              minHeight: '120px'
             }}>
               <div style={{
                 fontSize: '1.2rem',
@@ -312,18 +381,26 @@ const About: React.FC = () => {
                 textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
                 fontFamily: '"Courier New", monospace'
               }}>
-                about me
+                <span style={{ color: '#e94560' }}>➜</span> <span style={{ color: '#ffbd2e' }}>~</span> about me
               </div>
               <div style={{
                 marginBottom: '0.5rem',
-                color: '#f4e8d0'
+                color: '#f4e8d0',
+                fontFamily: '"Courier New", monospace'
               }}>
                 Hey, welcome to my Portfolio!
               </div>
               <div style={{
-                color: '#f4e8d0'
+                color: '#f4e8d0',
+                fontFamily: '"Courier New", monospace',
+                minHeight: '1.5rem'
               }}>
-                I am a 14 Web Developer and Hobby Engineer from Germany.
+                {typedText}
+                <span style={{
+                  animation: 'blink 1s infinite',
+                  marginLeft: '2px',
+                  color: '#27c93f'
+                }}>{isTyping ? '▋' : ''}</span>
               </div>
             </div>
           </div>
@@ -332,6 +409,24 @@ const About: React.FC = () => {
         {/* Skills Section */}
         <Skills />
       </div>
+      
+      {/* Global Styles */}
+      <style>{`
+        @keyframes blink {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </section>
   );
 };

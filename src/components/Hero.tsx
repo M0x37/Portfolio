@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCompass, faAnchor } from '@fortawesome/free-solid-svg-icons';
 
 const Hero: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [compassRotation, setCompassRotation] = useState(0);
+  const [typedText, setTypedText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const heroRef = useRef<HTMLElement>(null);
+  const fullText = 'Building my Own stuff with Fun and Coffee';
 
   useEffect(() => {
     setIsVisible(true);
@@ -19,9 +27,50 @@ const Hero: React.FC = () => {
     };
   }, []);
 
+  // Typewriter effect
+  useEffect(() => {
+    if (!isTyping) return;
+    
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index <= fullText.length) {
+        setTypedText(fullText.slice(0, index));
+        index++;
+      } else {
+        setIsTyping(false);
+        clearInterval(interval);
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [isTyping]);
+
+  // Mouse tracking for compass
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroRef.current) return;
+      
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      setMousePos({ x, y });
+      
+      // Calculate angle for compass
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const angle = Math.atan2(y - centerY, x - centerX) * (180 / Math.PI) + 90;
+      setCompassRotation(angle);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <section 
+      ref={heroRef}
       id="home"
+      className="hero-section"
       style={{
         minHeight: '100vh',
         backgroundColor: '#f4e8d0',
@@ -53,6 +102,64 @@ const Hero: React.FC = () => {
       role="main"
       aria-label="Hero section"
     >
+      {/* Treasure Map Overlay with X Mark */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        pointerEvents: 'none',
+        opacity: 0.15,
+        backgroundImage: `
+          radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 40% 40%, rgba(218, 165, 32, 0.2) 0%, transparent 30%)
+        `,
+        zIndex: 0
+      }} />
+      
+      {/* Interactive Compass that follows mouse */}
+      <div style={{
+        position: 'absolute',
+        top: '2rem',
+        right: '2rem',
+        fontSize: '3rem',
+        color: '#8b4513',
+        opacity: 0.6,
+        transform: `rotate(${compassRotation}deg)`,
+        transition: 'transform 0.1s ease-out',
+        filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))',
+        zIndex: 10,
+        pointerEvents: 'none'
+      }}>
+        <FontAwesomeIcon icon={faCompass} />
+      </div>
+      
+      {/* Corner Decorations */}
+      <div style={{
+        position: 'absolute',
+        top: '1rem',
+        left: '1rem',
+        fontSize: '2rem',
+        color: '#8b4513',
+        opacity: 0.4,
+        transform: 'rotate(-45deg)'
+      }}>
+        <FontAwesomeIcon icon={faAnchor} />
+      </div>
+      <div style={{
+        position: 'absolute',
+        bottom: '1rem',
+        right: '1rem',
+        fontSize: '2rem',
+        color: '#8b4513',
+        opacity: 0.4,
+        transform: 'rotate(135deg)'
+      }}>
+        <FontAwesomeIcon icon={faAnchor} />
+      </div>
+
       {/* Animated background particles */}
       <div 
         style={{
@@ -61,13 +168,15 @@ const Hero: React.FC = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          pointerEvents: 'none'
+          pointerEvents: 'none',
+          zIndex: 1
         }}
         aria-hidden="true"
       >
         {[...Array(15)].map((_, i) => (
           <div
             key={i}
+            className="particle"
             style={{
               position: 'absolute',
               width: Math.random() * 3 + 1 + 'px',
@@ -138,15 +247,15 @@ const Hero: React.FC = () => {
               fontFamily: '"Georgia", "Times New Roman", serif',
               fontStyle: 'italic',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.2)',
-              animationName: isVisible ? 'slideInText' : 'none',
-              animationDuration: '1s',
-              animationTimingFunction: 'ease-out',
-              animationDelay: '0.8s',
-              animationFillMode: 'both'
+              minHeight: '2rem'
             }}
             tabIndex={0}
           >
-            Building my Own stuff with Fun and Coffee
+            {typedText}
+            <span style={{
+              animation: 'blink 1s infinite',
+              marginLeft: '2px'
+            }}>{isTyping ? '▋' : ''}</span>
           </p>
           
           <div style={{
