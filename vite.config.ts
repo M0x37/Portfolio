@@ -19,7 +19,7 @@ export default defineConfig({
         manualChunks: {
           // Separate vendor chunks
           'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-fa': ['@fortawesome/react-fontawesome', '@fortawesome/free-solid-svg-icons', '@fortawesome/free-brands-svg-icons'],
+          'vendor-ui': ['lucide-react'],
           // Page chunks will be auto-generated from lazy imports
         },
         // Optimize chunk naming for better caching
@@ -60,7 +60,7 @@ export default defineConfig({
       'X-Frame-Options': 'SAMEORIGIN',
       'X-XSS-Protection': '1; mode=block',
       'X-Content-Type-Options': 'nosniff',
-      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.emailjs.com http://192.168.178.21:3000;",
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' http://192.168.178.21:3000;",
       'Referrer-Policy': 'strict-origin-when-cross-origin',
       'Strict-Transport-Security': 'max-age=31536000; includeSubDomains'
     }
@@ -71,7 +71,7 @@ export default defineConfig({
       'X-Frame-Options': 'SAMEORIGIN',
       'X-XSS-Protection': '1; mode=block',
       'X-Content-Type-Options': 'nosniff',
-      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.emailjs.com http://192.168.178.21:3000;",
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' http://192.168.178.21:3000;",
       'Referrer-Policy': 'strict-origin-when-cross-origin',
       'Strict-Transport-Security': 'max-age=31536000; includeSubDomains'
     }
@@ -83,7 +83,7 @@ export default defineConfig({
   },
   // Optimize dependencies pre-bundling
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', '@fortawesome/react-fontawesome', '@fortawesome/free-solid-svg-icons', '@fortawesome/free-brands-svg-icons', 'emailjs-browser'],
+    include: ['react', 'react-dom', 'react-router-dom', 'lucide-react'],
     exclude: []
   },
   esbuild: {

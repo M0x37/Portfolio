@@ -1,730 +1,88 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faMapMarkerAlt, faPaperPlane, faUser, faSkull } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faLinktree } from '@fortawesome/free-brands-svg-icons';
-import emailjs from '@emailjs/browser';
+import React, { useEffect, useRef } from 'react';
+import { Mail, MapPin, ExternalLink } from 'lucide-react';
+import { GithubIcon, TwitterIcon } from '../components/Icons';
 
 const ContactPage: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          const targets = entry.target.querySelectorAll('.reveal');
+          targets.forEach((el, i) => {
+            setTimeout(() => el.classList.add('revealed'), i * 120);
+          });
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
-    try {
-      const result = await emailjs.send(
-        'service_ttlv9ps',
-        'template_rma27or',
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          to_email: 'maxschueller11@gmail.com'
-        },
-        'gujzx7hF_Xo8XTtiy'
-      );
+  const socials = [
+    { href: 'https://github.com/M0x37', icon: GithubIcon, label: 'GitHub' },
+    { href: 'https://x.com/Max3702q', icon: TwitterIcon, label: 'Twitter' },
+    { href: 'https://info.m0x2.de/', icon: ExternalLink, label: 'Linktree' },
+  ];
 
-      if (result.status === 200) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      console.error('EmailJS Error:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
   return (
-    <div style={{
-      backgroundColor: '#f4e8d0',
-      backgroundImage: `
-        linear-gradient(135deg, #f4e8d0 0%, #e8dcc0 50%, #dccfb0 100%),
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 10px,
-          rgba(139, 69, 19, 0.03) 10px,
-          rgba(139, 69, 19, 0.03) 20px
-        ),
-        repeating-linear-gradient(
-          -45deg,
-          transparent,
-          transparent 10px,
-          rgba(139, 69, 19, 0.03) 10px,
-          rgba(139, 69, 19, 0.03) 20px
-        )
-      `,
-      minHeight: '100vh',
-      color: '#2c1810',
-      fontFamily: '"Georgia", "Times New Roman", serif',
-      display: 'flex',
-      flexDirection: 'column'
-    }}>
-      {/* Header */}
-      <header style={{
-        backgroundColor: '#8b4513',
-        padding: '1rem',
-        textAlign: 'center',
-        border: '3px solid #654321',
-        borderRadius: '8px',
-        margin: '2rem'
-      }}>
-        <h1 style={{
-          fontSize: '2.5rem',
-          fontWeight: 'bold',
-          color: '#f4e8d0',
-          textTransform: 'uppercase',
-          letterSpacing: '2px',
-          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
-          fontFamily: '"Courier New", monospace'
-        }}>
-          <FontAwesomeIcon icon={faSkull} style={{ marginRight: '0.5rem' }} />
-          Get in Touch
-        </h1>
-      </header>
-      
-      <section style={{
-        flex: '1',
-        backgroundColor: 'rgba(244, 232, 208, 0.8)',
-        padding: '2rem',
-        border: '3px solid #8b4513',
-        borderRadius: '8px',
-        margin: '0 2rem 2rem'
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          width: '100%',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '4rem',
-          alignItems: 'start'
-        }}>
-          
-          {/* Contact Info */}
-          <div>
-            <p 
-              style={{
-                fontSize: '1.2rem',
-                color: '#2c1810',
-                opacity: 0.8,
-                marginBottom: '3rem',
-                lineHeight: '1.6'
-              }}
+    <div ref={sectionRef} className="min-h-screen bg-[#0A0A0A] pt-28 pb-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="max-w-3xl mx-auto w-full">
+        <div className="reveal mb-12 text-center">
+          <span className="text-accent font-mono text-xs tracking-[0.2em] uppercase">Contact</span>
+          <h1 className="font-heading font-bold tracking-tight text-white text-3xl sm:text-4xl lg:text-5xl mt-3">
+            Get in Touch
+          </h1>
+          <div className="w-12 h-0.5 bg-accent/50 mx-auto mt-4 rounded-full" />
+          <p className="mt-6 text-neutral-400 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+            I'm always interested in hearing about new projects and opportunities. Feel free to reach out!
+          </p>
+        </div>
+
+        <div className="reveal reveal-d1 flex justify-center gap-4 mb-8">
+          {socials.map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/5 border border-white/10 text-neutral-400 hover:text-accent hover:bg-white/10 hover:border-accent/30 transition-all duration-200"
+              role="button"
+              aria-label={`Visit ${social.label} profile`}
               tabIndex={0}
+              data-testid={`contact-social-${social.label.toLowerCase()}`}
             >
-              I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to get in touch!
-            </p>
+              <social.icon className="w-5 h-5" />
+            </a>
+          ))}
+        </div>
 
-            {/* Social Links */}
-            <div 
-              style={{
-                display: 'flex',
-                gap: '1rem',
-                marginBottom: '3rem'
-              }}
-              role="group"
-              aria-label="Social media links"
-            >
-              <a
-                href="https://github.com/M0x37"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  width: '45px',
-                  height: '45px',
-                  borderRadius: '50%',
-                  backgroundColor: 'rgba(139, 69, 19, 0.1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#8b4513',
-                  fontSize: '1.1rem',
-                  transition: 'all 0.3s ease',
-                  textDecoration: 'none',
-                  border: '2px solid #8b4513'
-                }}
-                role="button"
-                aria-label="Visit GitHub profile"
-                tabIndex={0}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = '#c9d1d9';
-                  e.currentTarget.style.color = '#171616';
-                  e.currentTarget.style.transform = 'translateY(-3px)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(201, 209, 217, 0.4)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.1)';
-                  e.currentTarget.style.color = '#c9d1d9';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.backgroundColor = '#c9d1d9';
-                  e.currentTarget.style.color = '#171616';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(201, 209, 217, 0.3)';
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.1)';
-                  e.currentTarget.style.color = '#c9d1d9';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-              >
-                <FontAwesomeIcon icon={faGithub} />
-              </a>
-              <a
-                href="https://x.com/Max3702q"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  width: '45px',
-                  height: '45px',
-                  borderRadius: '50%',
-                  backgroundColor: 'rgba(139, 69, 19, 0.1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#8b4513',
-                  fontSize: '1.1rem',
-                  transition: 'all 0.3s ease',
-                  textDecoration: 'none',
-                  border: '2px solid #8b4513'
-                }}
-                role="button"
-                aria-label="Visit Twitter profile"
-                tabIndex={0}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = '#8b4513';
-                  e.currentTarget.style.color = '#f4e8d0';
-                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.1)';
-                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(139, 69, 19, 0.5)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(139, 69, 19, 0.1)';
-                  e.currentTarget.style.color = '#8b4513';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.backgroundColor = '#c9d1d9';
-                  e.currentTarget.style.color = '#171616';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(201, 209, 217, 0.3)';
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.1)';
-                  e.currentTarget.style.color = '#c9d1d9';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-              >
-                <FontAwesomeIcon icon={faLinktree} />
-              </a>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-xl mx-auto">
+          <div
+            className="reveal reveal-d2 bg-[#121212] border border-white/10 rounded-xl p-7 text-center hover:border-accent/20 transition-all duration-300"
+            data-testid="contact-email-card"
+          >
+            <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+              <Mail className="w-5 h-5 text-accent" />
             </div>
-
-            {/* Contact Details */}
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2rem'
-            }}>
-              <div 
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '1rem',
-                  padding: '1.5rem',
-                  backgroundColor: 'rgba(201, 209, 217, 0.05)',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(201, 209, 217, 0.1)',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.08)';
-                  e.currentTarget.style.transform = 'translateX(5px)';
-                  e.currentTarget.style.borderColor = 'rgba(201, 209, 217, 0.2)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.05)';
-                  e.currentTarget.style.transform = 'translateX(0)';
-                  e.currentTarget.style.borderColor = 'rgba(201, 209, 217, 0.1)';
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.08)';
-                  e.currentTarget.style.transform = 'translateX(3px)';
-                  e.currentTarget.style.borderColor = 'rgba(201, 209, 217, 0.2)';
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.05)';
-                  e.currentTarget.style.transform = 'translateX(0)';
-                  e.currentTarget.style.borderColor = 'rgba(201, 209, 217, 0.1)';
-                }}
-              >
-                <div style={{
-                  width: '50px',
-                  height: '50px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #8b4513, #654321)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#f4e8d0',
-                  fontSize: '1.2rem',
-                  boxShadow: '0 2px 8px rgba(139, 69, 19, 0.4)'
-                }}
-                  aria-hidden="true"
-                >
-                  <FontAwesomeIcon icon={faEnvelope} />
-                </div>
-                <div>
-                  <div style={{
-                    fontSize: '0.9rem',
-                    color: '#5d4037',
-                    marginBottom: '0.25rem',
-                    fontWeight: '500'
-                  }}>
-                    Email
-                  </div>
-                  <div style={{
-                    fontSize: '1rem',
-                    color: '#2c1810',
-                    fontWeight: '600'
-                  }}>
-                    maxschueller11@gmail.com
-                  </div>
-                </div>
-              </div>
-
-              <div 
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '1rem',
-                  padding: '1.5rem',
-                  backgroundColor: 'rgba(201, 209, 217, 0.05)',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(201, 209, 217, 0.1)',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.08)';
-                  e.currentTarget.style.transform = 'translateX(5px)';
-                  e.currentTarget.style.borderColor = 'rgba(201, 209, 217, 0.2)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.05)';
-                  e.currentTarget.style.transform = 'translateX(0)';
-                  e.currentTarget.style.borderColor = 'rgba(201, 209, 217, 0.1)';
-                }}
-                onFocus={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.08)';
-                  e.currentTarget.style.transform = 'translateX(3px)';
-                  e.currentTarget.style.borderColor = 'rgba(201, 209, 217, 0.2)';
-                }}
-                onBlur={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(201, 209, 217, 0.05)';
-                  e.currentTarget.style.transform = 'translateX(0)';
-                  e.currentTarget.style.borderColor = 'rgba(201, 209, 217, 0.1)';
-                }}
-              >
-                <div style={{
-                  width: '50px',
-                  height: '50px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #8b4513, #654321)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#f4e8d0',
-                  fontSize: '1.2rem',
-                  boxShadow: '0 2px 8px rgba(139, 69, 19, 0.4)'
-                }}
-                aria-hidden="true"
-                >
-                  <FontAwesomeIcon icon={faMapMarkerAlt} />
-                </div>
-                <div>
-                  <div style={{
-                    fontSize: '0.9rem',
-                    color: '#5d4037',
-                    marginBottom: '0.25rem',
-                    fontWeight: '500'
-                  }}>
-                    Location
-                  </div>
-                  <div style={{
-                    fontSize: '1rem',
-                    color: '#2c1810',
-                    fontWeight: '600'
-                  }}>
-                    Germany
-                  </div>
-                </div>
-              </div>
-            </div>
+            <p className="text-xs text-neutral-500 font-mono uppercase tracking-wider mb-1.5">Email</p>
+            <p className="text-sm text-white font-medium break-all">maxschueller11@gmail.com</p>
           </div>
-
-          {/* Contact Form */}
-          <div style={{
-            backgroundColor: 'rgba(244, 232, 208, 0.95)',
-            borderRadius: '16px',
-            padding: '3rem',
-            border: '3px solid #8b4513',
-            boxShadow: '0 8px 32px rgba(139, 69, 19, 0.3)',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '4px',
-              background: 'linear-gradient(90deg, #8b4513 0%, #654321 50%, #8b4513 100%)',
-            }} 
-              aria-hidden="true"
-            />
-            
-            <h3 style={{
-              fontSize: '1.5rem',
-              fontWeight: '600',
-              margin: '0 0 2rem 0',
-              color: '#2c1810',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              fontFamily: '"Courier New", monospace'
-            }}>
-              <FontAwesomeIcon icon={faPaperPlane} style={{ fontSize: '1.2rem' }} />
-              Send me a message
-            </h3>
-            
-            <form 
-              onSubmit={handleSubmit} 
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1.5rem'
-              }}
-              noValidate
-              aria-label="Contact form"
-            >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label 
-                  htmlFor="name"
-                  style={{ 
-                    color: '#2c1810', 
-                    fontSize: '0.9rem', 
-                    fontWeight: '500', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    gap: '0.5rem',
-                    fontFamily: '"Courier New", monospace'
-                  }}
-                >
-                  <FontAwesomeIcon icon={faUser} style={{ fontSize: '0.8rem', marginRight: '0.5rem' }} />
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Your name"
-                  required
-                  aria-required="true"
-                  aria-describedby="name-error"
-                  style={{
-                    backgroundColor: 'rgba(244, 232, 208, 0.8)',
-                    border: '2px solid #8b4513',
-                    borderRadius: '8px',
-                    padding: '1rem',
-                    color: '#2c1810',
-                    fontSize: '1rem',
-                    transition: 'all 0.3s ease',
-                    outline: 'none',
-                    fontFamily: '"Georgia", serif'
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = '#654321';
-                    e.currentTarget.style.backgroundColor = '#f4e8d0';
-                    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(139, 69, 19, 0.2)';
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = '#8b4513';
-                    e.currentTarget.style.backgroundColor = 'rgba(244, 232, 208, 0.8)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                />
-              </div>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label 
-                  htmlFor="email"
-                  style={{ 
-                    color: '#2c1810', 
-                    fontSize: '0.9rem', 
-                    fontWeight: '500', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    gap: '0.5rem',
-                    fontFamily: '"Courier New", monospace'
-                  }}
-                >
-                  <FontAwesomeIcon icon={faEnvelope} style={{ fontSize: '0.8rem', marginRight: '0.5rem' }} />
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="your.email@example.com"
-                  required
-                  aria-required="true"
-                  aria-describedby="email-error"
-                  style={{
-                    backgroundColor: 'rgba(244, 232, 208, 0.8)',
-                    border: '2px solid #8b4513',
-                    borderRadius: '8px',
-                    padding: '1rem',
-                    color: '#2c1810',
-                    fontSize: '1rem',
-                    transition: 'all 0.3s ease',
-                    outline: 'none',
-                    fontFamily: '"Georgia", serif'
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = '#654321';
-                    e.currentTarget.style.backgroundColor = '#f4e8d0';
-                    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(139, 69, 19, 0.2)';
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = '#8b4513';
-                    e.currentTarget.style.backgroundColor = 'rgba(244, 232, 208, 0.8)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                />
-              </div>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label 
-                  htmlFor="message"
-                  style={{ 
-                    color: '#2c1810', 
-                    fontSize: '0.9rem', 
-                    fontWeight: '500',
-                    fontFamily: '"Courier New", monospace'
-                  }}
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Your message..."
-                  rows={6}
-                  required
-                  aria-required="true"
-                  aria-describedby="message-error"
-                  style={{
-                    backgroundColor: 'rgba(244, 232, 208, 0.8)',
-                    border: '2px solid #8b4513',
-                    borderRadius: '8px',
-                    padding: '1rem',
-                    color: '#2c1810',
-                    fontSize: '1rem',
-                    resize: 'vertical',
-                    fontFamily: '"Georgia", serif',
-                    transition: 'all 0.3s ease',
-                    outline: 'none'
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = '#654321';
-                    e.currentTarget.style.backgroundColor = '#f4e8d0';
-                    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(139, 69, 19, 0.2)';
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = '#8b4513';
-                    e.currentTarget.style.backgroundColor = 'rgba(244, 232, 208, 0.8)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                />
-              </div>
-              
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                style={{
-                  background: 'linear-gradient(135deg, #8b4513 0%, #654321 100%)',
-                  color: '#f4e8d0',
-                  border: '3px solid #8b4513',
-                  borderRadius: '8px',
-                  padding: '1rem 2rem',
-                  fontSize: '1rem',
-                  fontWeight: '600',
-                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                  transition: 'all 0.3s ease',
-                  alignSelf: 'flex-start',
-                  opacity: isSubmitting ? 0.7 : 1,
-                  position: 'relative',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 12px rgba(139, 69, 19, 0.4)',
-                  fontFamily: '"Courier New", monospace',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px'
-                }}
-                aria-label={isSubmitting ? 'Sending message...' : 'Send message'}
-                aria-busy={isSubmitting}
-                onMouseOver={(e) => {
-                  if (!isSubmitting) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #654321 0%, #8b4513 100%)';
-                    e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(139, 69, 19, 0.6)';
-                  }
-                }}
-                onMouseOut={(e) => {
-                  if (!isSubmitting) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #8b4513 0%, #654321 100%)';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 69, 19, 0.4)';
-                  }
-                }}
-                onFocus={(e) => {
-                  if (!isSubmitting) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #654321 0%, #8b4513 100%)';
-                    e.currentTarget.style.transform = 'translateY(-1px)';
-                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(139, 69, 19, 0.5)';
-                  }
-                }}
-                onBlur={(e) => {
-                  if (!isSubmitting) {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #8b4513 0%, #654321 100%)';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(139, 69, 19, 0.4)';
-                  }
-                }}
-              >
-                <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <FontAwesomeIcon icon={faPaperPlane} />
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </span>
-              </button>
-              
-              {submitStatus === 'success' && (
-                <div 
-                  style={{
-                    color: '#2c1810',
-                    fontSize: '0.9rem',
-                    marginTop: '1rem',
-                    padding: '1rem',
-                    backgroundColor: 'rgba(139, 69, 19, 0.15)',
-                    border: '2px solid #8b4513',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    animation: 'slideIn 0.5s ease-out'
-                  }}
-                  role="alert"
-                  aria-live="polite"
-                >
-                  <FontAwesomeIcon icon={faPaperPlane} />
-                  Message sent successfully! I'll get back to you soon.
-                </div>
-              )}
-              
-              {submitStatus === 'error' && (
-                <div 
-                  style={{
-                    color: '#8b0000',
-                    fontSize: '0.9rem',
-                    marginTop: '1rem',
-                    padding: '1rem',
-                    backgroundColor: 'rgba(139, 0, 0, 0.1)',
-                    border: '2px solid #8b0000',
-                    borderRadius: '8px',
-                    animation: 'shake 0.5s ease-out'
-                  }}
-                  role="alert"
-                  aria-live="polite"
-                >
-                  <FontAwesomeIcon icon={faPaperPlane} /> Failed to send message. Please try again or contact me directly.
-                </div>
-              )}
-            </form>
+          <div
+            className="reveal reveal-d3 bg-[#121212] border border-white/10 rounded-xl p-7 text-center hover:border-accent/20 transition-all duration-300"
+            data-testid="contact-location-card"
+          >
+            <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+              <MapPin className="w-5 h-5 text-accent" />
+            </div>
+            <p className="text-xs text-neutral-500 font-mono uppercase tracking-wider mb-1.5">Location</p>
+            <p className="text-sm text-white font-medium">Germany</p>
           </div>
         </div>
-      </section>
-
-      {/* Global styles */}
-      <style>{`
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          25% { transform: translateX(-5px); }
-          75% { transform: translateX(5px); }
-        }
-        
-        /* Focus visible styles for better accessibility */
-        :focus-visible {
-          outline: 2px solid #c9d1d9;
-          outline-offset: 2px;
-        }
-        
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-          section {
-            border: 2px solid #ffffff;
-          }
-          
-          input, textarea {
-            border: 2px solid #ffffff !important;
-          }
-        }
-        
-        /* Reduced motion support */
-        @media (prefers-reduced-motion: reduce) {
-          * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-          }
-        }
-      `}</style>
+      </div>
     </div>
   );
 };

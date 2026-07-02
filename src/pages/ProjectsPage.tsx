@@ -1,224 +1,108 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAnchor } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useRef } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 
 const ProjectsPage: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          const targets = entry.target.querySelectorAll('.reveal');
+          targets.forEach((el, i) => {
+            setTimeout(() => el.classList.add('revealed'), i * 120);
+          });
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const projects = [
     {
-      title: "Visio",
-      description: "A Real Time face tracking with shootings System.",
-      tech: ["React", "JWT", "OpenCV", "Claude"],
-      url: "https://example.com"
+      title: 'tempbox',
+      description: 'A low Budget temperature monitoring box for my Room, with a working Android APK App.',
+      tech: ['C', 'Capacitor', 'React', 'IOT'],
+      url: '',
     },
     {
-      title: "My Portfolio",
-      description: "My One Piece Themed Portfolio Website.",
-      tech: ["React", "Typescript",],
-      url: "https://github.com/M0x37/Portfolio"
+      title: 'Robot Arm',
+      description: 'A programmable robot arm for my Portfolio.',
+      tech: ['React', 'Arduino Code', 'esp32'],
+      url: 'https://github.com/M0x37/ROBOT_ARM',
     },
     {
-      title: "NEXUS | OSINt",
-      description: "A small OSINT Tool. I leaned to create CLI Tools with it.",
-      tech: ["Python", "HTMl", ],
-      url: "https://github.com/M0x37/NEXUS-OSINT-TOOL"
-    }
+      title: 'Planar',
+      description: 'The Perfect Project Manager.',
+      tech: ['React', 'TypeScript', 'Github OAuth', 'JWT'],
+      url: 'https://pplanar.vercel.app/',
+    },
   ];
 
   return (
-    <div style={{
-      backgroundColor: '#f4e8d0',
-      backgroundImage: `
-        linear-gradient(135deg, #f4e8d0 0%, #e8dcc0 50%, #dccfb0 100%),
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 10px,
-          rgba(139, 69, 19, 0.03) 10px,
-          rgba(139, 69, 19, 0.03) 20px
-        ),
-        repeating-linear-gradient(
-          -45deg,
-          transparent,
-          transparent 10px,
-          rgba(139, 69, 19, 0.03) 10px,
-          rgba(139, 69, 19, 0.03) 20px
-        )
-      `,
-      minHeight: '100vh',
-      color: '#2c1810',
-      fontFamily: '"Georgia", "Times New Roman", serif',
-      padding: '2rem'
-    }}>
-      {/* Header */}
-      <header style={{
-        backgroundColor: '#8b4513',
-        padding: '1rem',
-        textAlign: 'center',
-        marginBottom: '2rem',
-        border: '3px solid #654321',
-        borderRadius: '8px',
-        maxWidth: '800px',
-        margin: '0 auto 2rem auto'
-      }}>
-        <h1 style={{
-          fontSize: '2.5rem',
-          fontWeight: 'bold',
-          color: '#f4e8d0',
-          textTransform: 'uppercase',
-          letterSpacing: '2px',
-          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
-          fontFamily: '"Courier New", monospace'
-        }}>
-          <FontAwesomeIcon icon={faAnchor} style={{ marginRight: '0.5rem' }} />
-          Projects
-        </h1>
-      </header>
-      
-      {/* Projects Section */}
-      <section style={{
-        flex: '1',
-        backgroundColor: 'rgba(244, 232, 208, 0.8)',
-        padding: '2rem',
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        paddingTop: '3rem',
-        paddingBottom: '0.5rem',
-        border: '3px solid #8b4513',
-        borderRadius: '8px'
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          width: '100%'
-        }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            gap: '2rem'
-          }}>
-            {projects.map((project, index) => (
+    <div ref={sectionRef} className="min-h-screen bg-[#0A0A0A] pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
+        <div className="reveal mb-16">
+          <span className="text-accent font-mono text-xs tracking-[0.2em] uppercase">Portfolio</span>
+          <h1 className="font-heading font-bold tracking-tight text-white text-3xl sm:text-4xl lg:text-5xl mt-3">
+            My Projects
+          </h1>
+          <div className="w-12 h-0.5 bg-accent/50 mt-4 rounded-full" />
+        </div>
+
+        <div className="flex flex-col gap-8">
+          {projects.map((project, index) => {
+            const isEven = index % 2 === 0;
+            return (
               <div
                 key={index}
-                style={{
-                  backgroundColor: 'rgba(244, 232, 208, 0.9)',
-                  borderRadius: '16px',
-                  padding: '2.5rem',
-                  border: '3px solid #8b4513',
-                  boxShadow: '0 8px 20px rgba(139, 69, 19, 0.3)',
-                  transition: 'all 0.3s ease',
-                  textAlign: 'center'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 12px 32px rgba(139, 69, 19, 0.6)';
-                  e.currentTarget.style.backgroundColor = '#f4e8d0';
-                  e.currentTarget.style.borderColor = '#654321';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(139, 69, 19, 0.3)';
-                  e.currentTarget.style.backgroundColor = 'rgba(244, 232, 208, 0.9)';
-                  e.currentTarget.style.borderColor = '#8b4513';
-                }}
+                className={`reveal ${index === 0 ? '' : `reveal-d${index + 1}`} group`}
               >
-                {/* Project Header */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '1.5rem'
-                }}>
-                  <h3 style={{
-                    fontSize: '1.5rem',
-                    fontWeight: '600',
-                    margin: '0',
-                    color: '#2c1810',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    fontFamily: '"Courier New", monospace'
-                  }}>
-                    {project.title}
-                  </h3>
-                </div>
-                
-                <p style={{
-                  color: '#5d4037',
-                  margin: '0 0 1.5rem 0',
-                  lineHeight: 1.6,
-                  fontSize: '1rem',
-                  fontFamily: '"Georgia", serif',
-                  textAlign: 'center'
-                }}>
-                  {project.description}
-                </p>
-                
-                <div style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '0.5rem',
-                  marginBottom: '2rem',
-                  justifyContent: 'center'
-                }}>
-                  {project.tech.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      style={{
-                        backgroundColor: 'rgba(139, 69, 19, 0.2)',
-                        color: '#5d4037',
-                        padding: '0.25rem 0.75rem',
-                        borderRadius: '8px',
-                        fontSize: '0.875rem',
-                        fontWeight: '500',
-                        border: '1px solid rgba(201, 209, 217, 0.15)'
-                      }}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                
-                <a 
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    backgroundColor: 'transparent',
-                    color: '#8b4513',
-                    border: '3px solid #8b4513',
-                    padding: '0.75rem 1.5rem',
-                    fontSize: '1rem',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    fontWeight: 'bold',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    fontFamily: '"Courier New", monospace',
-                    transition: 'all 0.3s ease',
-                    textDecoration: 'none',
-                    display: 'inline-block',
-                    textAlign: 'center'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(139, 69, 19, 0.6)';
-                    e.currentTarget.style.backgroundColor = '#654321';
-                    e.currentTarget.style.borderColor = '#8b4513';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(139, 69, 19, 0.4)';
-                    e.currentTarget.style.backgroundColor = 'transparent';
-                    e.currentTarget.style.borderColor = '#8b4513';
-                  }}
+                <div
+                  className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} bg-[#121212] border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all duration-300`}
                 >
-                  <span style={{ position: 'relative', zIndex: 1 }}>View Project</span>
-                </a>
+                  <div className="lg:w-1/3 bg-white/[0.015] p-8 lg:p-10 flex items-center">
+                    <span className="font-heading font-bold text-[3rem] sm:text-[4rem] text-white/[0.04] leading-none">
+                      {(index + 1).toString().padStart(2, '0')}
+                    </span>
+                  </div>
+                  <div className="lg:w-2/3 p-6 lg:p-8 flex flex-col justify-center">
+                    <h3 className="font-heading font-bold tracking-tight text-white text-xl sm:text-2xl mb-2 group-hover:text-accent transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    <p className="text-neutral-400 text-sm sm:text-base leading-relaxed mb-4">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mb-5">
+                      {project.tech.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-2.5 py-1 rounded-md bg-white/5 text-neutral-400 text-xs font-mono border border-white/[0.06]"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-neutral-500 font-medium hover:text-white transition-colors duration-200 w-fit"
+                      data-testid={`project-link-${index}`}
+                    >
+                      View Project
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
-      </section>
+      </div>
     </div>
   );
 };
