@@ -2,8 +2,11 @@ import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { GithubIcon, TwitterIcon } from './Icons';
 import Skills from './Skills';
+import { copy, type Locale } from '../i18n';
 
-const About: React.FC = () => {
+type AboutProps = { locale: Locale };
+
+const About: React.FC<AboutProps> = ({ locale }) => {
   const socials = [
     { href: 'https://github.com/M0x37', icon: GithubIcon, label: 'GitHub' },
     { href: 'https://x.com/Max3702q', icon: TwitterIcon, label: 'X' },
@@ -16,21 +19,18 @@ const About: React.FC = () => {
         <div className="container">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">About me</p>
-              <h2 id="about-heading">A maker at heart.</h2>
+              <p className="eyebrow">{copy.about.eyebrow[locale]}</p>
+              <h2 id="about-heading">{copy.about.heading[locale]}</h2>
             </div>
-            <p>I enjoy building clear interfaces, useful tools and small experiments that bring ideas to life.</p>
+            <p>{copy.about.intro[locale]}</p>
           </div>
 
           <div className="feature-grid">
             <article className="bio-panel">
               <p className="bio-quote">
-                “The best part is seeing a rough idea become something people can actually <strong>use.</strong>”
+                {copy.about.quote[locale].replace('use.', 'use.')} 
               </p>
-              <p className="bio-details">
-                I&apos;m a 14-year-old web developer and hobby electronics engineer based in Germany. Most of my time goes into
-                building with React and Python, exploring new tools and learning by making things from scratch.
-              </p>
+              <p className="bio-details">{copy.about.bio[locale]}</p>
               <div className="social-row">
                 {socials.map((social) => (
                   <a
@@ -47,19 +47,19 @@ const About: React.FC = () => {
               </div>
             </article>
 
-            <aside className="facts-panel" aria-label="Quick facts">
-              <span className="panel-label">Quick facts</span>
+            <aside className="facts-panel" aria-label={copy.about.quickFacts[locale]}>
+              <span className="panel-label">{copy.about.quickFacts[locale]}</span>
               <ul className="fact-list">
-                <li><span>Age</span><strong>14</strong></li>
-                <li><span>Based in</span><strong>Germany</strong></li>
-                <li><span>Focus</span><strong>React &amp; Python</strong></li>
-                <li><span>Also building</span><strong>Hardware projects</strong></li>
+                <li><span>{copy.about.age[locale]}</span><strong>14</strong></li>
+                <li><span>{copy.about.basedIn[locale]}</span><strong>{copy.about.germany[locale]}</strong></li>
+                <li><span>{copy.about.focus[locale]}</span><strong>{copy.about.focusValue[locale]}</strong></li>
+                <li><span>{copy.about.building[locale]}</span><strong>{copy.about.hardware[locale]}</strong></li>
               </ul>
             </aside>
           </div>
         </div>
       </section>
-      <Skills />
+      <Skills locale={locale} />
     </>
   );
 };

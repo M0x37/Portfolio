@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, MoonStar, SunMedium, X } from 'lucide-react';
+import { copy, type Locale } from '../i18n';
 
 const navLinks = [
-  { path: '/', label: 'Home', exact: true },
-  { path: '/projects', label: 'Projects' },
-  { path: '/contact', label: 'Contact' },
-];
+  { path: '/', key: 'home', exact: true },
+  { path: '/projects', key: 'projects' },
+  { path: '/contact', key: 'contact' },
+] as const;
 
-const Header: React.FC = () => {
+type HeaderProps = {
+  theme: 'light' | 'dark';
+  locale: Locale;
+  onToggleTheme: () => void;
+};
+
+const Header: React.FC<HeaderProps> = ({ theme, locale, onToggleTheme }) => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -45,7 +52,7 @@ const Header: React.FC = () => {
           aria-current={isActive(link.path, link.exact) ? 'page' : undefined}
           onClick={() => mobile && setIsMenuOpen(false)}
         >
-          {link.label}
+          {copy.nav[link.key][locale]}
         </Link>
       ))}
     </>
@@ -54,17 +61,26 @@ const Header: React.FC = () => {
   return (
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <nav className="nav-shell" aria-label="Main navigation">
-        <Link to="/" className="brand" aria-label="M0x37 Portfolio home">
-          <img className="brand-logo" src="/brand/ms-mark-512.png" width="32" height="32" alt="" />
+        <Link to="/" className="brand" aria-label={copy.nav.homeAria[locale]}>
           <span>M0x37</span>
-          <span className="brand-note">portfolio</span>
+          <span className="brand-note">{copy.nav.portfolio[locale]}</span>
         </Link>
 
         <div className="primary-nav">{navigation()}</div>
 
-        <Link to="/contact" className="nav-utility">
-          Let&apos;s build <span aria-hidden="true">↗</span>
-        </Link>
+        <div className="nav-utility">
+          <Link to="/contact" className="nav-utility-link">
+            {copy.nav.build[locale]} <span aria-hidden="true">↗</span>
+          </Link>
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={onToggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <SunMedium size={16} strokeWidth={2.2} /> : <MoonStar size={16} strokeWidth={2.2} />}
+          </button>
+        </div>
 
         <button
           type="button"
@@ -79,6 +95,14 @@ const Header: React.FC = () => {
 
         <div id="mobile-navigation" className={`mobile-nav ${isMenuOpen ? 'is-open' : ''}`}>
           {navigation(true)}
+          <button
+            type="button"
+            className="theme-toggle mobile-theme-toggle"
+            onClick={onToggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? (locale === 'de' ? 'Hell' : 'Light mode') : (locale === 'de' ? 'Dunkel' : 'Dark mode')}
+          </button>
         </div>
       </nav>
     </header>

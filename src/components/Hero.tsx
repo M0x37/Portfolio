@@ -2,26 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { GithubIcon, TwitterIcon } from './Icons';
+import { copy, type Locale } from '../i18n';
 
-const Hero: React.FC = () => (
+type HeroProps = { locale: Locale };
+
+const Hero: React.FC<HeroProps> = ({ locale }) => (
   <section className="hero" id="home" aria-labelledby="hero-heading">
     <div className="container hero-layout">
       <div>
-        <p className="eyebrow">Web developer · Germany</p>
+        <p className="eyebrow">{copy.hero.eyebrow[locale]}</p>
         <h1 id="hero-heading">
-          I turn ideas into <span>useful things.</span>
+          {copy.hero.headline[locale]} <span>{copy.hero.highlight[locale]}</span>
         </h1>
-        <p className="hero-copy">
-          I&apos;m Max, a web developer and hobby electronics enthusiast. I enjoy turning small ideas into useful
-          digital experiences and working prototypes.
-        </p>
+        <p className="hero-copy">{copy.hero.copy[locale]}</p>
         <div className="hero-actions">
           <Link to="/projects" className="button-primary">
-            Explore projects <ArrowRight size={17} strokeWidth={2.5} />
+            {copy.hero.primary[locale]} <ArrowRight size={17} strokeWidth={2.5} />
           </Link>
-          <Link to="/contact" className="button-secondary">Get in touch</Link>
+          <Link to="/contact" className="button-secondary">{copy.hero.secondary[locale]}</Link>
         </div>
-        <div className="social-row" aria-label="Social profiles">
+        <div className="social-row" aria-label={copy.contact.socialsAria[locale]}>
           <a className="icon-link" href="https://github.com/M0x37" target="_blank" rel="noopener noreferrer" aria-label="M0x37 on GitHub">
             <GithubIcon className="w-[18px] h-[18px]" />
           </a>
