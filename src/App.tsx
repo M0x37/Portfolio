@@ -64,7 +64,7 @@ const App: React.FC = () => {
           <div className="container footer-shell">
             <p className="footer-copy">© 2026 M0x37 · {copy.footer.built[locale]}</p>
             <div className="footer-links">
-              <a href="https://impressum.m0x2.de/" target="_blank" rel="noopener noreferrer">{copy.footer.impressum[locale]}</a>
+              <a href="https://impressum.m0x2.dev/" target="_blank" rel="noopener noreferrer">{copy.footer.impressum[locale]}</a>
               <a href="https://github.com/M0x37" target="_blank" rel="noopener noreferrer">{copy.footer.github[locale]}</a>
             </div>
           </div>
