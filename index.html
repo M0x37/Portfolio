@@ -6,7 +6,9 @@
   <meta name="theme-color" content="#000">
   <meta name="description" content="M0x37 — Web developer · Germany. React & Python projects, hobby electronics.">
   <title>M0x37 — Portfolio</title>
-  <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <script>document.documentElement.classList.add('is-loading');</script>
+  <link rel="stylesheet" href="css/critical.css">
+  <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet';document.documentElement.classList.remove('is-loading')" onerror="console.error('Could not load the main stylesheet:', this.href);document.documentElement.classList.remove('is-loading')">
   <noscript><link rel="stylesheet" href="css/style.css"></noscript>
   <link rel="icon" type="image/png" href="assets/images/icebear_favicon.png">
   <link rel="apple-touch-icon" href="assets/images/icebear_favicon.png">
@@ -21,6 +23,22 @@
   <meta name="twitter:image" content="https://m0x2.dev/icebear_favicon.png">
 </head>
 <body>
+  <div class="loading-skeleton" role="status" aria-label="Loading portfolio">
+    <div class="skeleton-mark" aria-hidden="true"></div>
+    <div class="skeleton-content" aria-hidden="true">
+      <div class="skeleton-heading"></div>
+      <div class="skeleton-subheading"></div>
+      <div class="skeleton-copy">
+        <div></div><div></div><div></div>
+      </div>
+      <div class="skeleton-links"><div></div><div></div><div></div></div>
+      <div class="skeleton-section"></div>
+      <div class="skeleton-project"></div>
+      <div class="skeleton-project"></div>
+    </div>
+    <div class="skeleton-bear" aria-hidden="true"></div>
+  </div>
+
   <!-- Nav -->
   <nav class="p-2 top-0 bg-bg absolute lg:fixed z-50" aria-label="Primary navigation">
     <a href="/" class="w-10 h-10 grid place-items-center rounded-md transition hover:text-ink" aria-label="Home">
@@ -33,7 +51,7 @@
   </nav>
 
   <!-- Page wrapper -->
-  <div class="reveal [--translate-from-y:1rem] w-content mx-auto max-w-max-content pt-20vh">
+  <div class="page-content reveal [--translate-from-y:1rem] w-content mx-auto max-w-max-content pt-20vh">
     <main class="w-full">
 
       <!-- Header / Hero -->
@@ -103,11 +121,6 @@
         </section>
       </div>
 
-      <!-- Cool bear sticker (Ice Bear, We Bare Bears · Cartoon Network · CC BY-SA 2.0 · via Wikimedia Commons) -->
-      <div class="bear-sticker" aria-label="Ice Bear">
-        <img src="bear_cutouts/06_final.png" alt="Ice Bear" width="1121" height="1403" fetchpriority="high" decoding="async">
-      </div>
-
       <!-- Footer -->
       <footer class="w-full mb-8 mt-14">
         <div class="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between">
@@ -174,6 +187,11 @@
     </main>
   </div>
 
+  <!-- Cool bear sticker (Ice Bear, We Bare Bears · Cartoon Network · CC BY-SA 2.0 · via Wikimedia Commons) -->
+  <div class="bear-sticker" aria-label="Ice Bear">
+    <img src="bear_cutouts/06_final.png" alt="Ice Bear" width="1121" height="1403" fetchpriority="high" decoding="async">
+  </div>
+
   <script>
     async function animateBearWave() {
       const bear = document.querySelector('.bear-sticker img');
@@ -215,8 +233,6 @@
 
       bear.src = staticImage;
       sticker.classList.remove('is-waving');
-      sticker.classList.add('wave-finished');
-      window.setTimeout(() => sticker.classList.remove('wave-finished'), 450);
     }
 
     animateBearWave();
