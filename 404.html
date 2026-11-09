@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000">
+  <meta name="description" content="Seite nicht gefunden — M0x37 Portfolio">
+  <title>404 — Seite nicht gefunden · M0x37</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="assets/images/icebear_favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/icebear_favicon.png">
+  <meta property="og:title" content="404 — Seite nicht gefunden · M0x37">
+  <meta property="og:description" content="Die gesuchte Seite existiert nicht.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://m0x2.dev/404.html">
+  <meta property="og:image" content="https://m0x2.dev/icebear_favicon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="404 — Seite nicht gefunden · M0x37">
+  <meta name="twitter:description" content="Die gesuchte Seite existiert nicht.">
+  <meta name="twitter:image" content="https://m0x2.dev/icebear_favicon.png">
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="p-2 top-0 bg-bg absolute lg:fixed z-50" aria-label="Primary navigation">
+    <a href="index.html" class="w-10 h-10 grid place-items-center rounded-md transition hover:text-ink" aria-label="Home">
+      <svg class="gem w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path class="gem__solid gem__facet" d="M1 8.33 5 2.33h14l4 6-11 13.34L1 8.33Z" fill="currentColor"></path>
+        <path class="gem__outline gem__facet" d="M1 8.33h22M1 8.33 5 2.33h14l4 6-11 13.34L1 8.33Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+      </svg>
+      <span class="sr-only">M0x37</span>
+    </a>
+  </nav>
+
+  <!-- Page wrapper -->
+  <div class="reveal [--translate-from-y:1rem] w-content mx-auto max-w-max-content pt-20vh">
+    <main class="w-full">
+
+      <!-- Header -->
+      <header class="text-balance mb-6">
+        <h1 class="text-fluid leading-none mb-2" aria-label="404">
+          <svg class="namemark fill-canvastext" viewBox="0 0 200 60" aria-hidden="true" role="img" aria-label="404">
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                  font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace"
+                  font-weight="600" font-size="26" letter-spacing="0.06em">404</text>
+          </svg>
+          <span class="sr-only">Seite nicht gefunden</span>
+        </h1>
+        <p class="font-mono font-medium text-xs leading-1-35 tracking-0-08 uppercase">
+          Die gesuchte Seite existiert nicht.
+        </p>
+      </header>
+
+      <!-- Content -->
+      <div class="mb-4">
+        <div class="text-balance">
+          <p class="mb-4">Die Seite, die du suchst, gibt es hier nicht. Vielleicht war der Link veraltet oder es gibt einen Tippfehler in der Adresse.</p>
+        </div>
+
+        <div class="sm:flex sm:items-start sm:gap-2">
+          <div class="pt-4">
+            <ul class="font-mono text-meta uppercase text-muted flex w-fit flex-wrap items-center gap-2">
+              <li class="flex items-center gap-2"><a href="index.html" class="link-ui">Home</a><span class="text-faint" aria-hidden="true"> ·</span></li>
+              <li class="flex items-center gap-2"><a href="projects.html" class="link-ui">Projects</a><span class="text-faint" aria-hidden="true"> ·</span></li>
+              <li class="flex items-center gap-2"><a href="contact.html" class="link-ui">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="w-full mb-8 mt-14">
+        <ul class="font-mono font-normal text-micro uppercase text-faint mt-8 flex flex-wrap gap-x-5 gap-y-1">
+          <li>&copy; 2026 M0x37 · Built with curiosity.</li>
+          <li><a href="https://impressum.m0x2.dev/" target="_blank" rel="noreferrer noopener" class="link-ui">Impressum</a></li>
+          <li><a href="datenschutz.html" class="link-ui">Datenschutz</a></li>
+          <li class="hidden" data-colophon-viewport></li>
+        </ul>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    function updateClock() {
+      const el = document.querySelector('[data-clock]');
+      if (!el) return;
+      const now = new Date();
+      const parts = now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      });
+      el.textContent = parts;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>
