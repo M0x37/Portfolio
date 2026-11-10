@@ -69,10 +69,68 @@
 
       <!-- Footer -->
       <footer class="w-full mb-8 mt-14">
-        <ul class="font-mono font-normal text-micro uppercase text-faint mt-8 flex flex-wrap gap-x-5 gap-y-1">
-          <li>&copy; 2026 M0x37 · Built with curiosity.</li>
+        <div class="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between">
+          <div class="w-full xl:w-content shrink-0">
+            <section data-presence class="font-mono font-medium text-meta uppercase">
+              <ul class="grid w-full gap-x-10 gap-y-1-5 sm:grid-cols-2">
+                <li class="flex items-center gap-2">
+                  <span class="size-4 shrink-0 grayscale grid place-items-center text-muted">
+                    <svg class="w-4 h-4" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <title>Location</title>
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                  </span>
+                  <span class="flex items-baseline whitespace-nowrap">
+                    <span class="group/clip block overflow-hidden" style="width:calc(10ch + 0.6em)">
+                      <span class="inline-flex whitespace-nowrap"><span class="shrink-0" aria-hidden="true">Germany</span></span>
+                    </span>
+                    <span class="sr-only">Germany</span>
+                  </span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="size-4 shrink-0 grayscale grid place-items-center text-muted">
+                    <svg class="w-4 h-4" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <title>Clock</title>
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                  </span>
+                  <span class="flex items-baseline whitespace-nowrap">
+                    <span class="group/clip block overflow-hidden" style="width:calc(6ch + 0.36em)">
+                      <span class="inline-flex whitespace-nowrap"><span class="shrink-0" aria-hidden="true" data-clock>00:00</span></span>
+                    </span>
+                    <span class="sr-only">Time</span>
+                  </span>
+                </li>
+                <li class="flex items-center gap-2 group/readout">
+                  <span class="size-4 shrink-0 grayscale grid place-items-center text-muted group-hover/readout\:text-accent group-focus-within/readout\:text-accent">
+                    <svg class="w-4 h-4" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <title>GitHub</title>
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.8c0-3.37-3.1-6-7-6h-1c-3.9 0-7 2.63-7 6v3.8Zm0 0L9 16m7 0 2.5-2.5M12 3v1.5M12 19.5V21m4.5-3L19 14m0 0 1.5 1.5M3 14l1.5-1.5M17 7c2 0 4 1.5 4 3.5v1c0 1-0.5 2-1.5 2.5L12 18.5 6.5 14c-1-0.5-1.5-1.5-1.5-2.5v-1c0-2 2-3.5 4-3.5 1 0 2 0.5 2.5 1M12 12.5c-1.5 0-2.5 1-2.5 2.5s1 2.5 2.5 2.5 2.5-1 2.5-2.5-1-2.5-2.5-2.5Z"/>
+                    </svg>
+                  </span>
+                  <span class="flex items-baseline whitespace-nowrap">
+                    <span class="group/clip block overflow-hidden" style="width:calc(16ch + 0.96em)">
+                      <a class="inline-flex whitespace-nowrap link-ui" href="https://github.com/M0x37" target="_blank" rel="noreferrer noopener" aria-label="M0x37 on GitHub"><span class="shrink-0" aria-hidden="true">github.com/M0x37</span></a>
+                    </span>
+                  </span>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+
+        <ul class="font-mono font-normal text-large uppercase text-faint mt-8 flex flex-wrap gap-x-5 gap-y-1">
+          <li>&copy; 2026 M0x37 ·</li>
           <li><a href="https://impressum.m0x2.dev/" target="_blank" rel="noreferrer noopener" class="link-ui">Impressum</a></li>
-          <li><a href="/privacy" class="link-ui">Datenschutz</a></li>
+          <li><a href="privacy.html" class="link-ui">Privacy Policy</a></li>
+          <li>
+            <details class="credits">
+              <summary class="credits__btn link-ui cursor-pointer" aria-label="Bildnachweis anzeigen">ℹ</summary>
+              <p class="text-xxs opacity-30 mt-1">Bear: Ice Bear (We Bare Bears) · Cartoon Network · CC BY-SA 2.0 · via Wikimedia Commons</p>
+            </details>
+          </li>
           <li class="hidden" data-colophon-viewport></li>
         </ul>
       </footer>
