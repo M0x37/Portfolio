@@ -6,6 +6,7 @@
     { "src": "projects.html", "use": "@vercel/static" },
     { "src": "contact.html", "use": "@vercel/static" },
     { "src": "404.html", "use": "@vercel/static" },
+    { "src": "Privacy_Policy.html", "use": "@vercel/static" },
     { "src": "datenschutz.html", "use": "@vercel/static" },
     { "src": "css/critical.css", "use": "@vercel/static" },
     { "src": "css/style.css", "use": "@vercel/static" },
@@ -25,6 +26,7 @@
     { "src": "/", "dest": "/index.html" },
     { "src": "/projects", "dest": "/projects.html" },
     { "src": "/contact", "dest": "/contact.html" },
+    { "src": "/privacy", "dest": "/Privacy_Policy.html" },
     { "src": "/datenschutz", "dest": "/datenschutz.html" },
     { "src": "/404", "dest": "/404.html" },
     { "src": "/(.*)", "dest": "/$1" }
