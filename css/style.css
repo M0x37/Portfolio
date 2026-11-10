@@ -517,3 +517,21 @@ a:is(:hover, :focus-visible) .gem__facet {
   .xl\:items-start { align-items: flex-start; }
   .xl\:justify-between { justify-content: space-between; }
 }
+
+/* ===== Footer info button: image credits ===== */
+.credits summary {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font: inherit;
+  color: inherit;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+.credits summary::-webkit-details-marker { display: none; }
+.credits summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
