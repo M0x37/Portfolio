@@ -17,6 +17,7 @@
     { "src": "bear_cutouts/06_final.png", "use": "@vercel/static" },
     { "src": "assets/images/Ice_Bear_(We_Bare_Bears).svg", "use": "@vercel/static" },
     { "src": "assets/images/icebear_favicon.png", "use": "@vercel/static" },
+    { "src": "favicon.ico", "use": "@vercel/static" },
     { "src": "assets/svg/fish1 (2).svg", "use": "@vercel/static" },
     { "src": "sitemap.xml", "use": "@vercel/static" },
     { "src": "robots.txt", "use": "@vercel/static" }
