@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000">
   <meta name="description" content="M0x37 — Web developer · Germany. React & Python projects, hobby electronics.">
   <title>M0x37 — Portfolio</title>
-  <script>document.documentElement.classList.add('is-loading');</script>
-  <link rel="stylesheet" href="css/critical.css">
-  <link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet';document.documentElement.classList.remove('is-loading')" onerror="console.error('Could not load the main stylesheet:', this.href);document.documentElement.classList.remove('is-loading')">
-  <noscript><link rel="stylesheet" href="css/style.css"></noscript>
+  <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="assets/images/icebear_favicon.png">
   <link rel="apple-touch-icon" href="assets/images/icebear_favicon.png">
   <meta property="og:title" content="M0x37 — Portfolio">
@@ -23,25 +20,8 @@
   <meta name="twitter:image" content="https://m0x2.dev/icebear_favicon.png">
 </head>
 <body>
-  <div class="loading-skeleton" role="status" aria-label="Loading portfolio">
-    <div class="skeleton-mark" aria-hidden="true"></div>
-    <div class="skeleton-content" aria-hidden="true">
-      <div class="skeleton-heading"></div>
-      <div class="skeleton-subheading"></div>
-      <div class="skeleton-copy">
-        <div></div><div></div><div></div>
-      </div>
-      <div class="skeleton-links"><div></div><div></div><div></div></div>
-      <div class="skeleton-section"></div>
-      <div class="skeleton-project"></div>
-      <div class="skeleton-project"></div>
-    </div>
-    <div class="skeleton-bear" aria-hidden="true"></div>
-  </div>
-
-  <!-- Nav -->
-  <nav class="p-2 top-0 bg-bg absolute lg:fixed z-50" aria-label="Primary navigation">
-    <a href="/" class="w-10 h-10 grid place-items-center rounded-md transition hover:text-ink" aria-label="Home">
+  <nav class="p-2 top-0 bg-bg absolute lg:fixed z-50" aria-label="Hauptnavigation">
+    <a href="/" class="w-10 h-10 grid place-items-center rounded-md transition hover:text-ink">
       <svg class="gem w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path class="gem__solid gem__facet" d="M1 8.33 5 2.33h14l4 6-11 13.34L1 8.33Z" fill="currentColor"></path>
         <path class="gem__outline gem__facet" d="M1 8.33h22M1 8.33 5 2.33h14l4 6-11 13.34L1 8.33Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
@@ -50,19 +30,15 @@
     </a>
   </nav>
 
-  <!-- Page wrapper -->
   <div class="page-content reveal [--translate-from-y:1rem] w-content mx-auto max-w-max-content pt-20vh">
     <main class="w-full">
-
-      <!-- Header / Hero -->
       <header class="text-balance mb-6">
-        <h1 class="text-fluid leading-none mb-2" aria-label="Hey, I'm Max">Hey, I'm Max</h1>
+        <h1 class="text-fluid leading-none mb-2">Hey, I'm Max</h1>
         <p class="font-mono font-medium text-xs leading-1-35 tracking-0-08 uppercase">
           M0x37
         </p>
       </header>
 
-      <!-- About / copy -->
       <div class="mb-4">
         <div class="text-balance">
           <p class="mb-4">Web developer and hobby electrician, currently expanding my skills by learning how to apply AI in various fields.</p>
@@ -76,18 +52,15 @@
               <li class="flex items-center gap-2"><a href="contact.html" class="link-ui">Contact</a></li>
             </ul>
           </div>
-
-
         </div>
       </div>
 
-      <!-- Latest / Projects -->
       <div class="w-full mt-7" id="projects">
         <section data-latest class="w-full max-w-full">
           <h2 class="font-mono text-meta uppercase text-muted mb-1-5">Selected work</h2>
           <ol class="list-none p-0">
             <li>
-              <a href="#" class="group/row flex items-center gap-2 py-1 font-mono font-medium text-meta uppercase link-ui" aria-label="Tempbox">
+              <a href="#" class="group/row flex items-center gap-2 py-1 font-mono font-medium text-meta uppercase link-ui">
                 <svg class="shrink-0 size-4 text-muted group-hover/row\:text-accent group-focus-visible/row\:text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6.5 3.2 6.5 19 10.4 15.1 13.1 20.6 15.4 19.5 12.7 14.1 18.4 13.4Z"></path>
                 </svg>
@@ -95,17 +68,16 @@
               </a>
             </li>
             <li>
-              <a href="#" class="group/row flex items-center gap-2 py-1 font-mono font-medium text-meta uppercase link-ui" aria-label="Robot arm">
+              <a href="#" class="group/row flex items-center gap-2 py-1 font-mono font-medium text-meta uppercase link-ui">
                 <svg class="shrink-0 size-4 text-muted group-hover/row\:text-accent group-focus-visible/row\:text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6.5 3.2 6.5 19 10.4 15.1 13.1 20.6 15.4 19.5 12.7 14.1 18.4 13.4Z"></path>
                 </svg>
                 <span class="truncate">Robot arm</span>
               </a>
             </li>
-
           </ol>
-          <a href="https://github.com/M0x37" target="_blank" rel="noreferrer noopener" class="font-mono text-meta uppercase text-muted link-ui ml-6 mt-2-5 inline-flex items-center gap-1" aria-label="View all on GitHub">
-            <span aria-hidden="true">View all</span>
+          <a href="https://github.com/M0x37" target="_blank" rel="noreferrer noopener" class="font-mono text-meta uppercase text-muted link-ui ml-6 mt-2-5 inline-flex items-center gap-1">
+            <span>View all</span>
             <svg class="size-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5 19.5 4.5m0 0H8.25m11.25 0v11.25"></path>
             </svg>
@@ -113,7 +85,6 @@
         </section>
       </div>
 
-      <!-- Footer -->
       <footer class="w-full mb-8 mt-14">
         <div class="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between">
           <div class="w-full xl:w-content shrink-0">
@@ -127,26 +98,20 @@
                       <circle cx="12" cy="10" r="3"/>
                     </svg>
                   </span>
-                  <span class="flex items-baseline whitespace-nowrap">
-                    <span class="group/clip block overflow-hidden" style="width:calc(10ch + 0.6em)">
-                      <span class="inline-flex whitespace-nowrap"><span class="shrink-0" aria-hidden="true">Germany</span></span>
-                    </span>
-                    <span class="sr-only">Germany</span>
+                  <span>
+                    Germany
                   </span>
                 </li>
                 <li class="flex items-center gap-2">
                   <span class="size-4 shrink-0 grayscale grid place-items-center text-muted">
-                      <svg class="w-4 h-4" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <svg class="w-4 h-4" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <title>Clock</title>
                       <circle cx="12" cy="12" r="10"/>
                       <polyline points="12 6 12 12 16 14"/>
                     </svg>
                   </span>
-                  <span class="flex items-baseline whitespace-nowrap">
-                    <span class="group/clip block overflow-hidden" style="width:calc(6ch + 0.36em)">
-                      <span class="inline-flex whitespace-nowrap"><span class="shrink-0" aria-hidden="true" data-clock>00:00</span></span>
-                    </span>
-                    <span class="sr-only">Time</span>
+                  <span>
+                    <time data-clock>00:00</time>
                   </span>
                 </li>
                 <li class="flex items-center gap-2 group/readout">
@@ -156,10 +121,8 @@
                       <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.8c0-3.37-3.1-6-7-6h-1c-3.9 0-7 2.63-7 6v3.8Zm0 0L9 16m7 0 2.5-2.5M12 3v1.5M12 19.5V21m4.5-3L19 14m0 0 1.5 1.5M3 14l1.5-1.5M17 7c2 0 4 1.5 4 3.5v1c0 1-0.5 2-1.5 2.5L12 18.5 6.5 14c-1-0.5-1.5-1.5-1.5-2.5v-1c0-2 2-3.5 4-3.5 1 0 2 0.5 2.5 1M12 12.5c-1.5 0-2.5 1-2.5 2.5s1 2.5 2.5 2.5 2.5-1 2.5-2.5-1-2.5-2.5-2.5Z"/>
                     </svg>
                   </span>
-                  <span class="flex items-baseline whitespace-nowrap">
-                    <span class="group/clip block overflow-hidden" style="width:calc(16ch + 0.96em)">
-                      <a class="inline-flex whitespace-nowrap link-ui" href="https://github.com/M0x37" target="_blank" rel="noreferrer noopener" aria-label="M0x37 on GitHub"><span class="shrink-0" aria-hidden="true">github.com/M0x37</span></a>
-                    </span>
+                  <span>
+                    <a href="https://github.com/M0x37" target="_blank" rel="noreferrer noopener">github.com/M0x37</a>
                   </span>
                 </li>
               </ul>
@@ -169,23 +132,21 @@
 
         <ul class="font-mono font-normal text-large uppercase text-faint mt-8 flex flex-wrap gap-x-5 gap-y-1">
           <li>&copy; 2026 M0x37 ·</li>
-          <li><a href="https://impressum.m0x2.dev/" target="_blank" rel="noreferrer noopener" class="link-ui">Impressum</a></li>
-          <li><a href="privacy.html" class="link-ui">Privacy Policy</a></li>
+          <li><a href="https://impressum.m0x2.dev/" target="_blank" rel="noreferrer noopener">Impressum</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
           <li>
             <details class="credits">
-              <summary class="credits__btn link-ui cursor-pointer" aria-label="Bildnachweis anzeigen">ℹ</summary>
+              <summary class="credits__btn">ℹ</summary>
               <p class="text-xxs opacity-30 mt-1">Bear: Ice Bear (We Bare Bears) · Cartoon Network · CC BY-SA 2.0 · via Wikimedia Commons</p>
             </details>
           </li>
           <li class="hidden" data-colophon-viewport></li>
         </ul>
       </footer>
-
     </main>
   </div>
 
-  <!-- Cool bear sticker (Ice Bear, We Bare Bears · Cartoon Network · CC BY-SA 2.0 · via Wikimedia Commons) -->
-  <div class="bear-sticker" aria-label="Ice Bear">
+  <div class="bear-sticker">
     <img src="bear_cutouts/06_final.png" alt="Ice Bear" width="1121" height="1403" fetchpriority="high" decoding="async">
   </div>
 
@@ -239,7 +200,6 @@
 
     animateBearWave();
 
-    // Auch bei Mouseover erneut winken lassen (nicht nur einmal beim Seitenstart)
     const bearSticker = document.querySelector('.bear-sticker');
     if (bearSticker) {
       bearSticker.addEventListener('mouseenter', animateBearWave);
