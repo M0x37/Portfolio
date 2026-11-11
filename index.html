@@ -56,17 +56,9 @@
 
       <!-- Header / Hero -->
       <header class="text-balance mb-6">
-        <h1 class="text-fluid leading-none mb-2" aria-label="M0x37">
-          <!-- TODO: replace with your own namemark SVG -->
-          <svg class="namemark fill-canvastext" viewBox="0 0 200 60" aria-hidden="true" role="img" aria-label="M0x37">
-            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-                  font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace"
-                  font-weight="600" font-size="26" letter-spacing="0.06em">M0x37</text>
-          </svg>
-          <span class="sr-only">M0x37</span>
-        </h1>
+        <h1 class="text-fluid leading-none mb-2" aria-label="Hey, I'm Max">Hey, I'm Max</h1>
         <p class="font-mono font-medium text-xs leading-1-35 tracking-0-08 uppercase">
-          Web developer · Germany
+          M0x37
         </p>
       </header>
 
@@ -198,7 +190,10 @@
   </div>
 
   <script>
+    let isAnimating = false;
+
     async function animateBearWave() {
+      if (isAnimating) return;
       const bear = document.querySelector('.bear-sticker img');
       if (!bear || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -229,6 +224,7 @@
       const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
       await wait(350);
       const sticker = bear.closest('.bear-sticker');
+      isAnimating = true;
       sticker.classList.add('is-waving');
 
       for (const [index, image] of images.entries()) {
@@ -238,9 +234,16 @@
 
       bear.src = staticImage;
       sticker.classList.remove('is-waving');
+      isAnimating = false;
     }
 
     animateBearWave();
+
+    // Auch bei Mouseover erneut winken lassen (nicht nur einmal beim Seitenstart)
+    const bearSticker = document.querySelector('.bear-sticker');
+    if (bearSticker) {
+      bearSticker.addEventListener('mouseenter', animateBearWave);
+    }
 
     function updateClock() {
       const el = document.querySelector('[data-clock]');
