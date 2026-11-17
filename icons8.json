@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "icons": {
+    "pack": "m_outlined",
+    "sizes": [16, 24],
+    "color": "currentColor",
+    "items": {
+      "home": { "id": "83326", "commonName": "home--v2" },
+      "location": { "id": "85049", "commonName": "marker" },
+      "clock": { "id": "82767", "commonName": "clock" },
+      "github": { "id": "106562", "commonName": "github" },
+      "mail": { "id": "86840", "commonName": "mail" },
+      "link": { "id": "85777", "commonName": "link" },
+      "externalLink": { "id": "82787", "commonName": "external-link" },
+      "info": { "id": "82742", "commonName": "info" }
+    }
+  },
+  "tokens": {
+    "iconColor": "--color-muted",
+    "accent": "--color-accent"
+  }
+}
