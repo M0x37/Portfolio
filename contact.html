@@ -167,6 +167,7 @@
           <li>&copy; 2026 M0x37 ·</li>
           <li><a href="https://impressum.m0x2.dev/" target="_blank" rel="noreferrer noopener">Impressum</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a data-commit-link href="https://github.com/M0x37/Portfolio/commits/main" target="_blank" rel="noreferrer noopener">Commit <span data-commit>e61a95a</span></a></li>
           <li>
             <details class="credits">
               <summary class="credits__btn" aria-label="Show credits"><img class="icon" src="https://img.icons8.com/?id=82742&format=png&size=24" alt="" aria-hidden="true"></summary>
@@ -193,6 +194,28 @@
     }
     setInterval(updateClock, 1000);
     updateClock();
+
+    async function updateCommit() {
+      const el = document.querySelector('[data-commit]');
+      const link = document.querySelector('[data-commit-link]');
+      if (!el || !link) return;
+
+      try {
+        const response = await fetch('https://api.github.com/repos/M0x37/Portfolio/commits/main', {
+          headers: { Accept: 'application/vnd.github+json' },
+          cache: 'no-store',
+        });
+        if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
+        const commit = await response.json();
+        const sha = commit.sha;
+        if (typeof sha !== 'string' || sha.length < 7) throw new Error('GitHub returned an invalid commit SHA');
+        el.textContent = sha.slice(0, 7);
+        link.href = commit.html_url;
+      } catch (error) {
+        console.error('Could not load the current commit.', error);
+      }
+    }
+    updateCommit();
   </script>
 </body>
 </html>
